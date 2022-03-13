@@ -19,6 +19,11 @@ int main()
         cin >> a;
         cout << "enter second char" << endl;
         cin >> b;
-        cout << ariel::mat(cols, rows, a, b) << endl;
+        try {
+            cout << ariel::mat(cols, rows, a, b) << endl;
+        } catch(exception &ex) {
+                cout << ex.what() << endl;
+        }
+        
     }    
 }
