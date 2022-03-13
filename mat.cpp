@@ -6,6 +6,12 @@ using namespace std;
 const int MAX_CHAR_VAL = 127;
 const int MIN_CHAR_VAL = 32;
 
+/*
+- check for throws.
+- build a matrix made of vectors.
+- fill the matrix starting with outer layer (border) and so on.
+- build then return the string.
+*/
 string ariel::mat(int cols, int rows, char x, char y) {
     if (cols % 2 == 0 or rows % 2 == 0) {
         throw std::invalid_argument("invalid arguement - even number");
@@ -22,37 +28,32 @@ string ariel::mat(int cols, int rows, char x, char y) {
 
     string result;
     vector<vector<char>> carpet;
-
-    // initiallize - fill vector with trash values
-    for (int n = 0; n < rows; n++) {
-        vector<char> temp;
-        carpet.push_back(temp);
-        for (int m = 0; m < cols; m++) {
-            carpet[n].push_back('0');     
-        }
-    }
-
     char toFill = y;
     int u = 0; // upper row index
     int d = rows - 1; // lower row index
     int l = 0; // left column index
     int r = cols - 1; //right column index
 
+    // initiallize - declare and resize inner vectors
+    for (int i = 0; i < rows; i++) {
+        vector<char> inner_vector;
+        inner_vector.resize(cols);
+        carpet.push_back(inner_vector);
+    }
+
+    // fill matrix
     while (u <= d && l <= r) {
+        //swap char
         toFill = (toFill == y)? x : y;
 
         // fill rows
         for (int i = u; i <= r; i++) {
-            // carpet[u].insert(carpet[u].begin() + i, toFill);
-            // carpet[d].insert(carpet[d].begin() + i, toFill);
             carpet[u][i] = toFill;
             carpet[d][i] = toFill;
         }
 
         // fill columns
         for (int i = l; i <= d; i++) {
-            // carpet[i].insert(carpet[i].begin() + l, toFill);
-            // carpet[i].insert(carpet[i].begin() + r, toFill);
             carpet[i][l] = toFill;
             carpet[i][r] = toFill;
         }
@@ -73,7 +74,6 @@ string ariel::mat(int cols, int rows, char x, char y) {
         }
         result += '\n';
     }
-
     return result;
 }
 
