@@ -6,7 +6,7 @@ int main()
     int cols, rows;
     char a, b;
     while (true) {
-        cout << "Press A to use mat function, press B to exit" << endl;
+        cout << "Press anything to continue or B to terminate the program" << endl;
         cin >> x;
         if (x == 'B') {
             break;
